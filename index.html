@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='cs'>
+  <head>
+    <title></title>
+    <meta charset='utf-8'>
+    <meta name='description' content=''>
+    <meta name='keywords' content=''>
+    <meta name='author' content=''>
+    <meta name='robots' content='all'>
+    <!-- <meta http-equiv='X-UA-Compatible' content='IE=edge'> -->
+    <link href='/favicon.png' rel='shortcut icon' type='image/png'>
+  </head>
+  <body>
+  
+   Numero dispositivos:
+   <input type="text" name="fname" id="n-disp"><br>
+   Numero de sensores por dispositivo:
+   <input type="text" name="fname" id="n-sens"><br>
+   Frecuencia de censo (seg): 
+   <input type="text" name="fname" id="f-cens"><br>
+   
+   <p id="resp"></p>
+   
+    <script >
+    function calcula (a=0, b=0, c=0) {
+        return a * b * c;
+    }
+        
+    window.onload = function () {
+        input_n_disp =  document.getElementById("n-disp");
+        input_n_sens = document.getElementById("n-sens");
+        input_f_cens = document.getElementById("f-cens");
+
+        resp = document.getElementById("resp");
+
+        input_n_disp.value = 0;
+        input_n_sens.value = 0;
+        input_f_cens.value = 1;   
+
+        function keydownlistener (){
+            let max_por_segundo = input_n_disp.value * input_n_sens.value;
+            let max_por_minuto = input_n_disp.value * input_n_sens.value * (60/input_f_cens.value);
+            let max_por_hora = max_por_minuto * 60;
+            let max_por_dia = max_por_minuto*60*24;
+            let max_por_mes = max_por_minuto * 60 * 24 * 30;
+            let max_por_anio = max_por_minuto*60*24*365;
+//            temp = calcula (input_n_disp.value, input_n_sens.value, input_f_cens.value);
+            resp.innerHTML = "Maximo por segundo: " + max_por_segundo.toLocaleString() + " envios por segundo <br>";
+            resp.innerHTML += "Maximo por minuto: " + max_por_minuto.toLocaleString() + " envios por minuto <br>";
+            resp.innerHTML += "Maximo por hora: " + max_por_hora.toLocaleString() + " envios por hora <br>";
+            resp.innerHTML += "Maximo por dia: " + max_por_dia.toLocaleString() + " envios por dia <br>";
+            resp.innerHTML += "Maximo por mes: " + max_por_mes.toLocaleString() + " envios por mes <br>";
+            resp.innerHTML += "Maximo por anio: " + max_por_anio.toLocaleString() + " envios por anio <br>";
+        }
+
+        input_n_disp.addEventListener("keyup", keydownlistener);
+        input_n_sens.addEventListener("keyup", keydownlistener);
+        input_f_cens.addEventListener("keyup", keydownlistener);
+    };
+   </script>
+
+  </body>
+</html>
